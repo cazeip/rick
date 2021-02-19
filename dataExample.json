@@ -1,0 +1,19 @@
+[
+    {
+        "app-id": "797394844175171595",
+        "rpc-name": "Rubik's cube",
+        "last-used": "1610300324",
+        "rpc":{
+            "state": "Scrambling and solving",
+            "details": "Rubik's cube 3x3",
+            "startTimestamp" : null,
+            "endTimestamp": 1610300324000,
+            "largeImageKey": "rubik",
+            "largeImageText": "WCA 3x3",
+            "smallImageKey": null,
+            "smallImageText": null,
+            "partySize": 5,
+            "partyMax": 12
+        }
+    }
+]

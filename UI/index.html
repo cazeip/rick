@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css.css"/>
+    <title>Rick</title>
+</head>
+<body>
+    <div id="app-mount">
+        <div class="topBar">
+            <h1 id="topBarTitle">Rick</h1>
+            <!-- <span id="discordNotDetected">Discord not detected</span> -->
+            <div class="winButtons">
+                <button id="minimizeWindowWin" class="winMinimizeWindow">-</button>
+                <button id="maximizeWindowWin" class="winMinimizeWindow">l</button>
+                <button id="closeWindowWin" class="winCloseWindow">&times;</button>
+            </div>
+        </div>
+        <div class="content">
+            <div id="prompt" class="modal">
+                <div id="promptContent" class="modalContent">
+                    <span id="promptText">Give a name to your new Rich Presence.</span>
+                    <input type="text" class="dataInput" id="promptInput" placeholder="Ender a Rich presence name..." style="width: 100%; margin: 20px 0;"/>
+                    <div style="display: flex;">
+                        <button id="closePromptButton" class="button">Cancel</button>
+                        <button id="confirmModalButton" class="button">OK</button>
+                    </div>
+                </div>
+            </div>
+            <div id="splashscreen">
+                <h1 id="splashscreenWelcome">Welcome!</h1>
+                <p>This app allows you to set and save custom Rich Presence presets that will show up on your Discord profile.</p>
+                <p>Make sure you check our <a href="http://youtube.com">youtube channel</a> if you don't exactly know how to use this tool.</p>
+                <span id="splashscreenButton" class="interactableBtn">Let's get going!</span>
+            </div>
+            <div id="mainMenu" style="z-index: 1;">
+                <div id="videoReminder">
+                    <span>
+                        Watching <a href="https://youtu.be/dQw4w9wgXcq" target="_blank">our</a> video on the subject may help you use this tool.
+                    </span>
+                    <button id="newRPC" style="margin-left: auto;" class="button">New Rich Presence</button>
+                </div>
+                <div class="mainMenuList">
+                    <div class="listItem">
+                        <span class="itemName">Rubik's</span>
+                        <button class="edit">Edit</button>
+                        <button class="run">Run</button>
+                    </div>
+                </div>
+            </div>
+            <div id="editor" style="opacity: 1;transform: scale(1);padding-top: 0;">
+                <div class="half">
+                    <button id="backButton" style="width: 100%;">Back to main menu</button>
+                    <div class="inputContainer">
+                        <span class="inputPlaceholder">Application ID</span>
+                        <input type="text" class="dataInput" id="appId" placeholder="Application ID..."/>
+                    </div>
+                    <div class="inputContainer">
+                        <span class="inputPlaceholder">State</span>
+                        <input type="text" class="dataInput" id="state" placeholder="State..."/>
+                    </div>
+                    <div class="inputContainer">
+                        <span class="inputPlaceholder">Details</span>
+                        <input type="text" class="dataInput" id="details" placeholder="Details..."/>
+                    </div>
+                    <div class="inputContainer">
+                        <span class="inputPlaceholder">Start or Finish Time</span>
+                        <input type="datetime-local" class="dataInput" id="time" placeholder="Start or Finish time"/>
+                    </div>
+                    <div class="inputContainer">
+                        <span class="inputPlaceholder">Large Image</span>
+                        <input type="button" id="largeImage" class="dataInput"/>
+                    </div>
+                    <div class="inputContainer">
+                        <span class="inputPlaceholder">Small Image</span>
+                        <input type="button" id="smallImage" class="dataInput"/>
+                    </div>
+                    <div class="inputContainer">
+                        <span class="inputPlaceholder">Number of Players</span>
+                        <input type="number" class="dataInput" id="nbPlayers" placeholder="Number of Players"/>
+                    </div>
+                    <div class="inputContainer">
+                        <span class="inputPlaceholder">Max Number of Players</span>
+                        <input type="number" class="dataInput" id="nbMax" placeholder="Max Number of Players"/>
+                    </div>
+                </div>
+                <div class="half" style="background-color: var(--bg-secondary);">
+
+                </div>
+                <div class="imageModal" id="imageModal">
+                    <div class="imageModalContent" id="imageModalContent">
+                        <span>Please select an Image and add a text.</span>
+                        <div class="imageSelection">
+                            <select class="dataInput" id="imageSelect">
+                            </select>
+                            <input type="text" minlength="2" id="imageTooltip" class="dataInput" placeholder="Tooltip shown on hover...">
+                        </div>
+                        <button class="button" id="imageModalClose" style="margin-left: auto;display: block;margin-top: 5px;margin-bottom: 5px;">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="clientside.js"></script>
+</body>
+</html>
