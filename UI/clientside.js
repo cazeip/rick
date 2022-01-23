@@ -139,6 +139,7 @@ class editor{
         prnt.editingFile = doc;
         
         prnt.utils.setTitle(`Rick - Editing "${doc["rpc-name"]}"`);
+        document.getElementById('appNameUI').innerText = doc['rpc-name'];
     }
     openRpc(id){
         prnt.mainMenu.close();
@@ -157,6 +158,9 @@ class editor{
         document.getElementById('nbPlayers').value = this.revertCheck(doc.rpc.partySize);
         document.getElementById('nbMax').value = this.revertCheck(doc.rpc.partyMax);
         
+        document.getElementById('appNameUI').innerText = doc['rpc-name'];
+        
+        this.setDetails(doc.rpc.details);
         this.setState(doc.rpc.state);
         this.setNbPlayers(doc.rpc.partySize);
         this.setNbMax(doc.rpc.partyMax);
@@ -202,7 +206,11 @@ class editor{
     }
     setDetails(d){
         prnt.editingFile.rpc.details = this.check(d);
-        document.getElementById("detailsDis").innerText = d;
+        if(d === "" || typeof d == "undefined"){
+            document.getElementById("detailsDis").innerText = "";
+        }else{   
+            document.getElementById("detailsDis").innerText = d;
+        }
     }
     setTime(d){
         let b = new Date(d);
@@ -631,6 +639,7 @@ class Bt{
                                 document.getElementById('time').value = "";
                                 document.getElementById('smallImage').value = "None";
                                 document.getElementById('largeImage').value = "None";
+                                document.getElementById('appNameUI').innerText = "Your App's name";
 
                                 document.getElementById('uiLargeImage').src = `asset_A.png`;
                                 document.getElementById('uiSmallImage').src = `asset_B.png`;
