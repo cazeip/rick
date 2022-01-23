@@ -383,7 +383,16 @@ class imageModal{
             document.getElementById('smallImage').value = "None";
             document.getElementById('uiSmallImage').src = `asset_B.png`;
             document.getElementById('uiSmallImage').style.display = "none";
+            document.getElementById('smallTooltip').style.display = "none";
+            document.getElementById('smallTooltip').innerText = "";
         }else{
+            if(prnt.editingFile.rpc.smallImageText == "" || typeof prnt.editingFile.rpc.smallImageText == "undefined"){
+                document.getElementById('smallTooltip').style.display = "none";
+                document.getElementById('smallTooltip').innerText = "";
+            }else{
+                document.getElementById('smallTooltip').style.display = "block";
+                document.getElementById('smallTooltip').innerText = prnt.editingFile.rpc.smallImageText;
+            }
             document.getElementById('smallImage').value = `${prnt.editingFile.rpc.smallImageKey} - "${typeof prnt.editingFile.rpc.smallImageText == "undefined" ? "" : prnt.editingFile.rpc.smallImageText}"`;
             for (let i = 0; i < this.assetData.length; i++) {
                 const element = this.assetData[i];
@@ -399,7 +408,16 @@ class imageModal{
             document.getElementById('largeImage').value = "None";
             document.getElementById('uiLargeImage').src = `asset_A.png`;
             document.getElementById('bothImages').style.display = "none";
+            document.getElementById('bigTooltip').style.display = "none";
+            document.getElementById('bigTooltip').innerText = "";
         }else{
+            if(prnt.editingFile.rpc.largeImageText == "" || typeof prnt.editingFile.rpc.largeImageText == "undefined"){
+                document.getElementById('bigTooltip').style.display = "none";
+                document.getElementById('bigTooltip').innerText = "";
+            }else{
+                document.getElementById('bigTooltip').style.display = "block";
+                document.getElementById('bigTooltip').innerText = prnt.editingFile.rpc.largeImageText;
+            }
             document.getElementById('largeImage').value = `${prnt.editingFile.rpc.largeImageKey} - "${typeof prnt.editingFile.rpc.largeImageText == "undefined" ? "" : prnt.editingFile.rpc.largeImageText}"`;
             for (let i = 0; i < this.assetData.length; i++) {
                 const element = this.assetData[i];
@@ -640,6 +658,9 @@ class Bt{
                                 document.getElementById('smallImage').value = "None";
                                 document.getElementById('largeImage').value = "None";
                                 document.getElementById('appNameUI').innerText = "Your App's name";
+
+                                document.getElementById('bigTooltip').innerText = "";
+                                document.getElementById('smallTooltip').innerText = "";
 
                                 document.getElementById('uiLargeImage').src = `asset_A.png`;
                                 document.getElementById('uiSmallImage').src = `asset_B.png`;
