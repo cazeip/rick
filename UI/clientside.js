@@ -83,7 +83,7 @@ class utils{
     }
     setTitle(t){
         document.title = t;
-        document.getElementById('topBarTitle').innerText = t;
+        //document.getElementById('topBarTitle').innerText = t;
     }
     createElm(html){
         const temp = document.createElement('div');
