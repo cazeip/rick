@@ -291,6 +291,9 @@ body, html, #app-mount{
     display: flex;
     flex-direction: column;
 }
+.inputFull{
+    width: 100%;
+}
 .imageModal{
     position: absolute;
     top: 0;

@@ -149,6 +149,7 @@ class editor{
         
         prnt.utils.setTitle(`Rick - Editing "${doc["rpc-name"]}"`);
         document.getElementById('appNameUI').innerText = doc['rpc-name'];
+        document.getElementById('appName').value = doc['rpc-name'];
     }
     openRpc(id){
         prnt.mainMenu.close();
@@ -168,6 +169,7 @@ class editor{
         document.getElementById('nbMax').value = this.revertCheck(doc.rpc.partyMax);
         
         document.getElementById('appNameUI').innerText = doc['rpc-name'];
+        document.getElementById('appName').value = doc['rpc-name'];
         
         this.setDetails(doc.rpc.details);
         this.setState(doc.rpc.state);
@@ -179,10 +181,10 @@ class editor{
         prnt.imageModal.updateLargeImage();
         
 
-        if(doc.rpc.startTimestamp === undefined){
-            document.getElementById('time').value = prnt.utils.formatDate(doc.rpc.endTimestamp);
-        }else if(doc.rpc.endTimestamp === undefined){
-            document.getElementById('time').value = prnt.utils.formatDate(doc.rpc.startTimestamp);
+        if(typeof doc.rpc.startTimestamp == "undefined"){
+            document.getElementById('time').value = prnt.utils.formatDate(doc.rpc.endTimestamp * 1000);
+        }else if(typeof doc.rpc.endTimestamp == "undefined"){
+            document.getElementById('time').value = prnt.utils.formatDate(doc.rpc.startTimestamp * 1000);
         }
     }
     removeRpc(id){
@@ -199,6 +201,7 @@ class editor{
     confirmRemove(){
         let data = prnt.localStorage.data;
         data.splice(this.removing, 1);
+        this.removing = -1;
         prnt.localStorage.setData(data);
         prnt.mainMenu.parseInfo(data);
     }
@@ -214,7 +217,10 @@ class editor{
         return d === "" ? undefined : d;
     }
     checkNumber(d){
-        return d === "" ? undefined : parseInt(d);
+        return isNaN(d) ? undefined : parseInt(d);
+    }
+    setAppName(d){
+        prnt.editingFile["rpc-name"] = d;
     }
     setAppId(d){
         prnt.editingFile["app-id"] = this.check(d);
@@ -253,30 +259,29 @@ class editor{
     setNbPlayers(d){
         let countContainer = document.getElementById("count");
 
-        if(!isNaN(parseInt(d))){
+        prnt.editingFile.rpc.partySize = this.checkNumber(d);
+        if(!isNaN(d)){
             countContainer.innerText = ` (${prnt.editingFile.rpc.partySize} of ${prnt.editingFile.rpc.partyMax})`
         }
-        if(d === ""){
-            countContainer.style.display = "none";
-        }else{
+        if(prnt.editingFile.rpc.partySize && prnt.editingFile.rpc.partyMax){
             countContainer.style.display = "inline";
+        }else{
+            countContainer.style.display = "none";
         }
 
-        prnt.editingFile.rpc.partySize = this.checkNumber(d);
     }
     setNbMax(d){
         let countContainer = document.getElementById("count");
 
-        if(!isNaN(parseInt(d))){
+        prnt.editingFile.rpc.partyMax = this.checkNumber(d);
+        if(!isNaN(d)){
             countContainer.innerText = ` (${prnt.editingFile.rpc.partySize} of ${prnt.editingFile.rpc.partyMax})`
         }
-        if(d === ""){
-            countContainer.style.display = "none";
-        }else{
+        if(prnt.editingFile.rpc.partySize && prnt.editingFile.rpc.partyMax){
             countContainer.style.display = "inline";
+        }else{
+            countContainer.style.display = "none";
         }
-
-        prnt.editingFile.rpc.partyMax = this.checkNumber(d);
     }
 }
 class mainMenu{
@@ -516,6 +521,17 @@ class Bt{
                     ]
                 },
                 {
+                    id: "appName",
+                    events:[
+                        {
+                            name: "keyup",
+                            callback: () => {
+                                prnt.editor.setAppName(document.getElementById('appName').value);
+                            }
+                        }
+                    ]
+                },
+                {
                     id: "appId",
                     events:[
                         {
@@ -714,6 +730,7 @@ class Bt{
                                 document.getElementById('smallImage').value = "None";
                                 document.getElementById('largeImage').value = "None";
                                 document.getElementById('appNameUI').innerText = "Your App's name";
+                                document.getElementById('appName').value = "Your App's name";
 
                                 document.getElementById('bigTooltip').innerText = "";
                                 document.getElementById('smallTooltip').innerText = "";
