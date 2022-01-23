@@ -221,6 +221,7 @@ class editor{
     }
     setAppName(d){
         prnt.editingFile["rpc-name"] = d;
+        document.getElementById('appNameUI').innerText = prnt.editingFile['rpc-name'];
     }
     setAppId(d){
         prnt.editingFile["app-id"] = this.check(d);
