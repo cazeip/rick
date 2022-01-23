@@ -6,6 +6,9 @@ As of today, the **only** two supported platforms are:
 - Windows 8 or later
 - macOS Sierra (10.12) or later
 
+## Installation
+You should be able to get a "packaged" version of Rick in the "releases". Go ahead and extract that .zip file. There should be a .exe file for Windows users, or a .app for macOS users.
+
 ## Usage
 
 1. Start the app by opening the file *(.exe for Windows, .app for MacOS)*, on your first visit, you'll see a splash screen.
