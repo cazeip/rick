@@ -6,7 +6,8 @@
   "scripts": {
     "start": "electron index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-win": "electron-packager . --platform win32 --icon ./assets/icon.ico --out ./dist --overwrite --asar=true"
+    "build-win": "electron-packager . --platform win32 --icon ./assets/icon.ico --out ./dist --overwrite --asar=true",
+    "build-osx": "electron-packager . --platform darwin --icon ./assets/icon.icns --out ./dist --overwrite --asar=true"
   },
   "keywords": [
     "discord",

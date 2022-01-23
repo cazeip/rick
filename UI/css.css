@@ -7,6 +7,8 @@
     --modal-secondary: rgb(36, 36, 36);
     --standard-transition-duration: 300ms;
     --input-focus-bg: #E3F2FD;
+    --topBar-separation: #ccc;
+    --osxButtonOutline: rgb(0 0 0 / 10%);
 }
 @media (prefers-color-scheme: dark){
     :root{
@@ -17,6 +19,8 @@
         --modal-primary: rgb(255, 255, 255);
         --modal-secondary: rgb(230, 230, 230);
         --input-focus-bg: #2a3238;
+        --topBar-separation: #696969;
+        --osxButtonOutline: rgb(0 0 0 / 54%);
     }
 }
 *{
@@ -45,7 +49,7 @@ body, html, #app-mount{
 .topBar{
     width: 100%;
     background: var(--default-background-color);
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid var(--topBar-separation);
     display: flex;
     -webkit-app-region: drag;
     z-index: 1000;
@@ -63,7 +67,6 @@ body, html, #app-mount{
 }
 .content{
     position: absolute;
-    top: 33px;
     left: 0;
     width: 100%;
     height: 100%;
@@ -169,6 +172,32 @@ body, html, #app-mount{
 #topBarTitle{
     margin: 5px 10px;
     font-size: 17px;
+}
+.osxButtons{
+    display: none;
+    align-items: center;
+    margin-left: 4px;
+}
+.osxbutton:focus{
+    outline: none;
+}
+.osxbutton {
+    border: none;
+    border-radius: 10000px;
+    height: 14px;
+    width: 13px;
+    margin-left: 4px;
+    margin-right: 4px;
+    border: 1px var(--osxButtonOutline) solid;
+}
+#macMinimize{
+    background-color: #FEC309;
+}
+#macMaximise{
+    background-color: #29C732;
+}
+#macClose{
+    background-color: #FC2125;
 }
 .winButtons{
     margin-left: auto;

@@ -9,7 +9,13 @@ class windowManager{
         this.closeId = "closeWindowWin";
         this.minimizeId = "minimizeWindowWin";
         this.maximizeId = "maximizeWindowWin";
-        
+        if(process.platform != "win32"){
+            document.getElementsByClassName('winButtons')[0].style.display = "none";
+            document.getElementsByClassName('osxButtons')[0].style.display = "flex";
+            this.closeId = "macClose";
+            this.minimizeId = "macMinimize";
+            this.maximizeId = "macMaximise";
+        }
         document.getElementById(this.closeId).addEventListener('click', this.closeWindow);
         document.getElementById(this.minimizeId).addEventListener('click', this.minimizeWindow);
         document.getElementById(this.maximizeId).addEventListener('click', this.maximizeWindow);
@@ -251,7 +257,7 @@ class imageModal{
         prnt.utils.getAssets(prnt.editingFile["app-id"]).then(z => {
             if(z.code == undefined){
                 if(z.length == 0){
-                    alert('this app doesn\'t have any assets');
+                    alert('This app doesn\'t have any assets.');
                 }else{
                     this.imageSelect.innerHTML = "";
                     this.imageSelect.appendChild(prnt.utils.createElm(`<option value="undefined">None</option>`))
@@ -276,9 +282,9 @@ class imageModal{
                 }
             }else{
                 if(z.code == 50035){
-                    alert('The Application ID is Invalid')
+                    alert('The Application ID is invalid.')
                 }else if(z.code == 10002){
-                    alert('The Application ID is unknown')
+                    alert('The Application ID is unknown.')
                 }
             }
         });
@@ -294,8 +300,7 @@ class imageModal{
                 this.el.style.display = "none";
             }, 300);
             this.editing = -1;
-        }
-    }
+        }    }
     setTooltip(e){
         if(this.editing == 1){
             prnt.editingFile.rpc.smallImageText = prnt.editor.check(e);
@@ -548,7 +553,7 @@ class Bt{
             );
             this.mainMenu = new mainMenu();
             this.utils = new utils();
-            this.windowManager = new windowManager();
+            //this.windowManager = new windowManager();
             this.runner = new runner();
             this.editingFile = {rpc:{}};
             this.editor = new editor();
@@ -556,7 +561,7 @@ class Bt{
     }
     init(){
         this.buttonInteract.init();
-        this.windowManager.init();
+        //this.windowManager.init();
         setTimeout(() => {
             if(localStorage.hasSeenSplashScreen == undefined){
                 this.splashScreen.open();

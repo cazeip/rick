@@ -12,7 +12,7 @@ function createWindow() {
 		minHeight: 500,
 		resizable: true,
 		title: "Rick",
-		frame: false,
+		frame: true,
 		webPreferences: {
 			nodeIntegration: true,
 			enableRemoteModule: true,
