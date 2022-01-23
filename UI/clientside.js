@@ -182,9 +182,9 @@ class editor{
         
 
         if(typeof doc.rpc.startTimestamp == "undefined"){
-            document.getElementById('time').value = prnt.utils.formatDate(doc.rpc.endTimestamp * 1000);
+            document.getElementById('time').value = prnt.utils.formatDate(doc.rpc.endTimestamp);
         }else if(typeof doc.rpc.endTimestamp == "undefined"){
-            document.getElementById('time').value = prnt.utils.formatDate(doc.rpc.startTimestamp * 1000);
+            document.getElementById('time').value = prnt.utils.formatDate(doc.rpc.startTimestamp);
         }
     }
     removeRpc(id){
@@ -247,6 +247,7 @@ class editor{
     }
     setTime(d){
         let b = new Date(d);
+        console.log(b.getTime());
         if(b > (new Date)){
             //after
             prnt.editingFile.rpc.endTimestamp = b.getTime();
