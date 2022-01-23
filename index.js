@@ -19,7 +19,7 @@ function createWindow() {
 		},
 		backgroundColor: '#2b2b2b'
 	});
-
+	mainWindow.setMenu(null);
 	mainWindow.loadURL(url.format({
 		pathname: path.join(__dirname, '/UI/index.html'),
 		protocol: 'file:',
