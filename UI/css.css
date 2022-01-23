@@ -145,17 +145,27 @@ body, html, #app-mount{
 .listItem:hover{
     background-color: var(--bg-tertiary);
 }
-.edit, .run {
-    margin-left: auto;
-    background: #8c9aff;
+.edit, .run, .delete {
+    margin-left: 20px;
+    background-color: #64B5F6;
+    box-shadow: 0px 2px 0 0px #2196F3;
     border: 0;
     padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
 }
 .run {
-    margin-left: 20px;
-    background-color: #4CAF50;
+    background-color: #64f66b;
+    box-shadow: 0px 2px 0 0px #16a12d;
+}
+.delete{
+    margin-left: auto;
+    background-color: #f66464;
+    box-shadow: 0px 2px 0 0px #a11616;
+}
+.edit:active, .run:active, .delete:active{
+    transform: translateY(2px);
+    box-shadow: none;
 }
 .edit:focus, .run:focus{
     outline: none;
@@ -323,10 +333,8 @@ body, html, #app-mount{
     border-radius: 8px;
     box-shadow: 0px 4px 0 0px #2196F3;
 }
-#closePromptButton{
+.redPromptButton {
     display: block;
-    margin-left: auto;
-    margin-right: 5px;
     background-color: #E57373;
     box-shadow: 0px 4px 0 0px #F44336;
 }

@@ -120,11 +120,20 @@ class utils{
         }, 300);
         document.getElementById('promptInput').value = "";
     }
+    closeConfirm(){
+        document.getElementById('confirmContent').style.top = "45%"
+        document.getElementById('confirm').style.opacity = "0"
+        setTimeout(() => {
+            document.getElementById('confirm').style.display = "none";
+        }, 300);
+        document.getElementById('confirmText').innerText = "";
+    }
 }
 class editor{
     constructor(){
         this.editor = document.getElementById('editor');
         this.editing = -1;
+        this.removing = -1;
     }
     open(){
         this.editor.style.display = "block";
@@ -175,6 +184,23 @@ class editor{
         }else if(doc.rpc.endTimestamp === undefined){
             document.getElementById('time').value = prnt.utils.formatDate(doc.rpc.startTimestamp);
         }
+    }
+    removeRpc(id){
+        document.getElementById('confirm').style.display = "block";
+        let data = prnt.localStorage.data;
+        let doc = data[id];
+        this.removing = id;
+        setTimeout(() => {
+            document.getElementById('confirm').style.opacity = "1";
+            document.getElementById('confirmContent').style.top = "50%";
+            document.getElementById('confirmText').innerHTML = `Are you sure you want to delete <b>${doc['rpc-name']}</b>?`;
+        },10);
+    }
+    confirmRemove(){
+        let data = prnt.localStorage.data;
+        data.splice(this.removing, 1);
+        prnt.localStorage.setData(data);
+        prnt.mainMenu.parseInfo(data);
     }
     close(){
         setTimeout(()=>{
@@ -278,6 +304,12 @@ class mainMenu{
         for (let i = 0; i < d.length; i++) {
             const element = d[i];
             let htmlel = prnt.utils.createElm(`<div class="listItem"><span class="itemName">${d[i]["rpc-name"]}</span></div>`);
+            
+            let erase = document.createElement('button');
+            erase.innerText = "Delete";
+            erase.classList.add('delete');
+            erase.addEventListener('click', _ => {prnt.editor.removeRpc(i)});
+
             let edit = document.createElement('button');
             edit.innerText = "Edit";
             edit.classList.add('edit');
@@ -288,6 +320,7 @@ class mainMenu{
             run.classList.add('run');
             run.addEventListener('click', _ => {prnt.runner.runRpc(i)});
             
+            htmlel.appendChild(erase);
             htmlel.appendChild(edit);
             htmlel.appendChild(run);
             
@@ -617,6 +650,29 @@ class Bt{
                             name: "click",
                             callback: (e) => {
                                 prnt.utils.closePrompt();
+                            }
+                        }
+                    ]
+                },
+                {
+                    id: "keepButton",
+                    events:[
+                        {
+                            name: "click",
+                            callback: (e) => {
+                                prnt.utils.closeConfirm();
+                            }
+                        }
+                    ]
+                },
+                {
+                    id: "connfirmDeleteButton",
+                    events:[
+                        {
+                            name: "click",
+                            callback: (e) => {
+                                prnt.editor.confirmRemove();
+                                prnt.utils.closeConfirm();
                             }
                         }
                     ]

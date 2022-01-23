@@ -29,8 +29,17 @@
                     <span id="promptText">Give a name to your new Rich Presence.</span>
                     <input type="text" class="dataInput" id="promptInput" placeholder="Ender a Rich presence name..." style="width: 100%; margin: 20px 0;"/>
                     <div style="display: flex;">
-                        <button id="closePromptButton" class="button">Cancel</button>
+                        <button id="closePromptButton" class="button redPromptButton" style="margin-left: auto;">Cancel</button>
                         <button id="confirmModalButton" class="button">OK</button>
+                    </div>
+                </div>
+            </div>
+            <div id="confirm" class="modal">
+                <div id="confirmContent" class="modalContent">
+                    <span id="confirmText">Are you sure you want to</span>
+                    <div style="display: flex;margin-top: 30px;">
+                        <button id="keepButton" class="button" style="margin-left: auto;margin-right: 5px;">Keep</button>
+                        <button id="connfirmDeleteButton" class="button redPromptButton">Delete</button>
                     </div>
                 </div>
             </div>
@@ -52,6 +61,7 @@
                 <div class="mainMenuList">
                     <div class="listItem">
                         <span class="itemName">Rubik's</span>
+                        <button class="delete">Delete</button>
                         <button class="edit">Edit</button>
                         <button class="run">Run</button>
                     </div>
