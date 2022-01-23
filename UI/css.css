@@ -100,6 +100,7 @@ html {
 }
 #splashscreen h1 {
     margin: 0;
+    font-size: 2em;
 }
 #splashscreen p {
     color: var(--modal-secondary);
@@ -112,6 +113,41 @@ html {
 }
 .interactableBtn:hover {
     text-decoration: underline;
+}
+.links{
+    display: flex;
+    justify-content: space-evenly;
+}
+.sc_link:hover{
+    text-decoration: none;
+    background-image: none;
+    transform: translateY(-5px);
+}
+.sc_link{
+    display: flex;
+    background-color: var(--bg-secondary);
+    padding: 6px 10px;
+    margin: 5px;
+    border-radius: 6px;
+    transition: all 200ms;
+}
+.sc_link_img{
+    /* height: 100%; */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.sc_link_img.youtube{
+    background-image: url(youtube.png);
+    width: 34px;
+}
+.sc_link_img.github{
+    width: 24px;
+    background-image: url(github.png);
+}
+.sc_link_txt{
+    margin-left: 5px;
+    color: var(--modal-secondary);
 }
 #editor,
 #mainMenu {
@@ -957,36 +993,6 @@ html {
     to {
         clip: rect(64px, 9999px, 117px, 0);
     }
-}
-a,
-body,
-button,
-div,
-em,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-html,
-img,
-input,
-p,
-q,
-s,
-small,
-span,
-var {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    outline: 0;
-    font-weight: inherit;
-    font-style: inherit;
-    font-family: inherit;
-    font-size: 100%;
-    vertical-align: baseline;
 }
 a img {
     border: none;
