@@ -91,7 +91,7 @@ class utils{
         return temp.removeChild(temp.firstElementChild);
     }
     getAssets(clientId){
-        return fetch(`https://discord.com/api/v8/oauth2/applications/${clientId}/assets`).then(r => r.json());
+        return fetch(`https://discord.com/api/v9/oauth2/applications/${clientId}/assets`).then(r => r.json());
     }
     formatDate(date) {
         var d = new Date(date),
