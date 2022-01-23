@@ -157,6 +157,15 @@ class editor{
         document.getElementById('nbPlayers').value = this.revertCheck(doc.rpc.partySize);
         document.getElementById('nbMax').value = this.revertCheck(doc.rpc.partyMax);
         
+        this.setState(doc.rpc.state);
+        this.setNbPlayers(doc.rpc.partySize);
+        this.setNbMax(doc.rpc.partyMax);
+        
+        prnt.imageModal.assetData = doc.assetCache;
+        prnt.imageModal.updateSmallImage();
+        prnt.imageModal.updateLargeImage();
+        
+
         if(doc.rpc.startTimestamp === undefined){
             document.getElementById('time').value = prnt.utils.formatDate(doc.rpc.endTimestamp);
         }else if(doc.rpc.endTimestamp === undefined){
@@ -164,7 +173,9 @@ class editor{
         }
     }
     close(){
-        this.editor.style.display = "none";
+        setTimeout(()=>{
+            this.editor.style.display = "none"
+        }, 300);
     }
     revertCheck(d){
         return d === undefined ? "" : d;
@@ -180,9 +191,18 @@ class editor{
     }
     setState(d){
         prnt.editingFile.rpc.state = this.check(d);
+        let stateContainer = document.getElementById("stateContainer");
+        if(d === "" || typeof d == "undefined"){
+            stateContainer.style.display = "none";
+            document.getElementById("stateDis").innerText = "";
+        }else{
+            document.getElementById("stateDis").innerText = d;
+            stateContainer.style.display = "block";
+        }
     }
     setDetails(d){
         prnt.editingFile.rpc.details = this.check(d);
+        document.getElementById("detailsDis").innerText = d;
     }
     setTime(d){
         let b = new Date(d);
@@ -197,9 +217,31 @@ class editor{
         }
     }
     setNbPlayers(d){
+        let countContainer = document.getElementById("count");
+
+        if(!isNaN(parseInt(d))){
+            countContainer.innerText = ` (${prnt.editingFile.rpc.partySize} of ${prnt.editingFile.rpc.partyMax})`
+        }
+        if(d === ""){
+            countContainer.style.display = "none";
+        }else{
+            countContainer.style.display = "inline";
+        }
+
         prnt.editingFile.rpc.partySize = this.checkNumber(d);
     }
     setNbMax(d){
+        let countContainer = document.getElementById("count");
+
+        if(!isNaN(parseInt(d))){
+            countContainer.innerText = ` (${prnt.editingFile.rpc.partySize} of ${prnt.editingFile.rpc.partyMax})`
+        }
+        if(d === ""){
+            countContainer.style.display = "none";
+        }else{
+            countContainer.style.display = "inline";
+        }
+
         prnt.editingFile.rpc.partyMax = this.checkNumber(d);
     }
 }
@@ -252,6 +294,7 @@ class imageModal{
         this.imageSelect = document.getElementById('imageSelect');
         this.imageToolTip = document.getElementById('imageTooltip');
         this.editing = -1;
+        this.assetData = [];
     }
     open(n){
         prnt.utils.getAssets(prnt.editingFile["app-id"]).then(z => {
@@ -259,6 +302,8 @@ class imageModal{
                 if(z.length == 0){
                     alert('This app doesn\'t have any assets.');
                 }else{
+                    this.assetData = z;
+                    prnt.editingFile.assetCache = z;
                     this.imageSelect.innerHTML = "";
                     this.imageSelect.appendChild(prnt.utils.createElm(`<option value="undefined">None</option>`))
                     for (let i = 0; i < z.length; i++) {
@@ -300,12 +345,18 @@ class imageModal{
                 this.el.style.display = "none";
             }, 300);
             this.editing = -1;
-        }    }
+        }   
+    }
     setTooltip(e){
         if(this.editing == 1){
             prnt.editingFile.rpc.smallImageText = prnt.editor.check(e);
+            this.updateSmallImage();
         }else if(this.editing == 0){
             prnt.editingFile.rpc.largeImageText = prnt.editor.check(e);
+            this.updateLargeImage();
+        }
+        if (e == ""){
+            prnt.editingFile.rpc.smallImageText
         }
     }
     setImageKey(e){
@@ -313,8 +364,42 @@ class imageModal{
         if(e != "undefined") j = e;
         if(this.editing == 1){
             prnt.editingFile.rpc.smallImageKey = j;
+            this.updateSmallImage();
         }else if(this.editing == 0){
             prnt.editingFile.rpc.largeImageKey = j;
+            this.updateLargeImage();
+        }
+    }
+    updateSmallImage(){
+        if(typeof prnt.editingFile.rpc.smallImageKey == "undefined"){
+            document.getElementById('smallImage').value = "None";
+            document.getElementById('uiSmallImage').src = `asset_B.png`;
+            document.getElementById('uiSmallImage').style.display = "none";
+        }else{
+            document.getElementById('smallImage').value = `${prnt.editingFile.rpc.smallImageKey} - "${typeof prnt.editingFile.rpc.smallImageText == "undefined" ? "" : prnt.editingFile.rpc.smallImageText}"`;
+            for (let i = 0; i < this.assetData.length; i++) {
+                const element = this.assetData[i];
+                if(prnt.editingFile.rpc.smallImageKey == element.name){
+                    document.getElementById('uiSmallImage').src = `https://cdn.discordapp.com/app-assets/${prnt.editingFile["app-id"]}/${element.id}.png`;
+                    document.getElementById('uiSmallImage').style.display = "block";
+                }
+            }
+        }
+    }
+    updateLargeImage(){
+        if(typeof prnt.editingFile.rpc.largeImageKey == "undefined"){
+            document.getElementById('largeImage').value = "None";
+            document.getElementById('uiLargeImage').src = `asset_A.png`;
+            document.getElementById('bothImages').style.display = "none";
+        }else{
+            document.getElementById('largeImage').value = `${prnt.editingFile.rpc.largeImageKey} - "${typeof prnt.editingFile.rpc.largeImageText == "undefined" ? "" : prnt.editingFile.rpc.largeImageText}"`;
+            for (let i = 0; i < this.assetData.length; i++) {
+                const element = this.assetData[i];
+                if(prnt.editingFile.rpc.largeImageKey == element.name){
+                    document.getElementById('bothImages').style.display = "";
+                    document.getElementById('uiLargeImage').src = `https://cdn.discordapp.com/app-assets/${prnt.editingFile["app-id"]}/${element.id}.png`;
+                }
+            }
         }
     }
 }
@@ -544,6 +629,11 @@ class Bt{
                                 document.getElementById('nbPlayers').value = "";
                                 document.getElementById('nbMax').value = "";
                                 document.getElementById('time').value = "";
+                                document.getElementById('smallImage').value = "None";
+                                document.getElementById('largeImage').value = "None";
+
+                                document.getElementById('uiLargeImage').src = `asset_A.png`;
+                                document.getElementById('uiSmallImage').src = `asset_B.png`;
                                 prnt.mainMenu.open();
                             }
                         }

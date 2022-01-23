@@ -22,6 +22,7 @@
                 <button id="closeWindowWin" class="winCloseWindow">&times;</button>
             </div>
         </div> -->
+        <div class="darkModeMask" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;background: rgb(0,0,0,80%);display: none;"></div>
         <div class="content">
             <div id="prompt" class="modal">
                 <div id="promptContent" class="modalContent">
@@ -37,12 +38,14 @@
                 <h1 id="splashscreenWelcome">Welcome!</h1>
                 <p>This app allows you to set and save custom Rich Presence presets that will show up on your Discord profile.</p>
                 <p>Make sure you check our <a href="http://youtube.com">youtube channel</a> if you don't exactly know how to use this tool.</p>
-                <span id="splashscreenButton" class="interactableBtn">Let's get going!</span>
+                <div class="backButtonContainer">
+                    <span id="splashscreenButton" class="interactableBtn" style="text-decoration: underline;">Let's get going!</span>
+                </div>
             </div>
             <div id="mainMenu" style="z-index: 1;">
                 <div id="videoReminder">
                     <span>
-                        Watching <a href="https://youtu.be/dQw4w9wgXcq" target="_blank">our</a> video on the subject may help you use this tool.
+                        Watching <a href="https://youtu.be/dQw4w9wgXcq" target="_blank">my</a> video on the subject may help you use this tool.
                     </span>
                     <button id="newRPC" style="margin-left: auto;" class="button">New Rich Presence</button>
                 </div>
@@ -56,18 +59,20 @@
             </div>
             <div id="editor" style="opacity: 1;transform: scale(1);padding-top: 0;">
                 <div class="half">
-                    <button id="backButton" style="width: 100%;">Back to main menu</button>
+                    <div class="backButtonContainer">
+                        <span id="backButton">Back to main menu</span>
+                    </div>
                     <div class="inputContainer">
                         <span class="inputPlaceholder">Application ID</span>
                         <input type="text" class="dataInput" id="appId" placeholder="Application ID..."/>
                     </div>
                     <div class="inputContainer">
-                        <span class="inputPlaceholder">State</span>
-                        <input type="text" class="dataInput" id="state" placeholder="State..."/>
-                    </div>
-                    <div class="inputContainer">
                         <span class="inputPlaceholder">Details</span>
                         <input type="text" class="dataInput" id="details" placeholder="Details..."/>
+                    </div>
+                    <div class="inputContainer">
+                        <span class="inputPlaceholder">State</span>
+                        <input type="text" class="dataInput" id="state" placeholder="State..."/>
                     </div>
                     <div class="inputContainer">
                         <span class="inputPlaceholder">Start or Finish Time</span>
@@ -75,11 +80,11 @@
                     </div>
                     <div class="inputContainer">
                         <span class="inputPlaceholder">Large Image</span>
-                        <input type="button" id="largeImage" class="dataInput"/>
+                        <input value="None" type="button" id="largeImage" class="dataInput"/>
                     </div>
                     <div class="inputContainer">
                         <span class="inputPlaceholder">Small Image</span>
-                        <input type="button" id="smallImage" class="dataInput"/>
+                        <input value="None" type="button" id="smallImage" class="dataInput"/>
                     </div>
                     <div class="inputContainer">
                         <span class="inputPlaceholder">Number of Players</span>
@@ -91,7 +96,44 @@
                     </div>
                 </div>
                 <div class="half" style="background-color: var(--bg-secondary);">
-
+                    <div class="userPopout-101WGK">
+                        <div class="header-5vGZJs">
+                            <div class="flex-1xMQg5 flexVertical-3EM43- flexJustifyCenter-XyJP9E flexAlignCenter-2tn6as flexWrap-1K8nA- headerTop-1oP4Gl" style="flex: 1 1 auto;">
+                                <div class="avatarWrapper-3ojDhW">
+                                    <div class="avatar-16XVId popout-2fzvxG">
+                                        <div id="profilePic" style="background-image: url(userIcon.png); height: 100%; background-size: cover; border-radius: 50%; mask-size: 100%; mask-type: luminance; mask: url(mask2.svg);"></div>
+                                        <div class="statusOnline-1FlpW_ status-oxiHuE statusOnlineProfile-C7N-xU statusProfile-3ynqtt" style="border: 3px #7289da solid; transform: translate(3px, 3px);"></div>
+                                    </div>
+                                </div>
+                                <div class="headerText-dZ3aTA">
+                                    <div class="headerTagNoNickname-2OORDe"><span class="username-PM0_IU" id="userName">Clyde</span><span id="discriminator">#0000</span></div>
+                                </div>
+                            </div>
+                            <div class="content-eARZMs">
+                                <div class="activityUserPopout-1m5_4M">
+                                    <div class="headerTextNormal-IQv_F3 headerText-1MkmdY small-29zrCQ size12-DS9Pyp height16-3r2Q2W weightBold-13i9Oz">Playing a game</div>
+                                    <div class="bodyNormal-1mxJz_ body-2UpBpw">
+                                        <div id="bothImages" class="assets-CO38Qu" style="margin-right: 10px;">
+                                            <div class="tooltip">
+                                              <span class="tooltiptext" id="bigTooltip"></span>
+                                              <img src="asset_A.png" class="assetsLargeImageUserPopout-2SRcNA assetsLargeImage-3JJo62" id="uiLargeImage"/>
+                                            </div>
+                                            <div id="smallImage" class="tooltip" style="bottom: -4px;right: -4px;position: absolute;">
+                                              <span class="tooltiptext" id="smallTooltip" style="bottom: 23px;left: -9px;"></span>
+                                              <img src="asset_B.png" class="assetsSmallImageUserPopout-3fqJpC assetsSmallImage-1SwkaS" style="border: 3px #7289da solid;" id="uiSmallImage">
+                                            </div>
+                                        </div>
+                                        <div class="flexChild-faoVW3 content-3x5Lgs">
+                                            <div class="nameNormal-3JdJyH ellipsis-3FlOLA textRow-1sYCLh weightSemiBold-tctXJ7" title="Your App's name">Your App's name</div>
+                                            <div title="Competitive" class="details-mW9zpA ellipsis-3FlOLA textRow-1sYCLh" id="detailsDis"></div>
+                                            <div class="state-1FEEKx ellipsis-3FlOLA textRow-1sYCLh" id="stateContainer"><span title="Playing Solo" id="stateDis"></span><span id="count"></span></div>
+                                            <div class="timestamp-y6iRau ellipsis-3FlOLA textRow-1sYCLh">00:00 elapsed</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="imageModal" id="imageModal">
                     <div class="imageModalContent" id="imageModalContent">
