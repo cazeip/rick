@@ -26,3 +26,7 @@ You should be able to get a "packaged" version of Rick in the "releases". Go ahe
 7. Fill in all the details you want for your Rich Presence. In order to add images (max. 2), click on "Large image" and choose the name of one of the images you've uploaded earlier as well as a tooltip, which will be shown when you hover over the image. *In case it says "this application doesn't have any assets", that means you didn't wait enough on step 4*.
 
 8. Since you filled everything, go back to the main menu, and hit "Run". This will show the Rich Presence on the account connected to the opened Discord. If you want to stop showing the rich presence, simply quit Rick.
+
+
+## License
+This code if available under GPL-2.0
